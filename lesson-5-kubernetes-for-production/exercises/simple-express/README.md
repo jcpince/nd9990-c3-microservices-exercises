@@ -14,3 +14,16 @@ By default, the application should be loaded on `localhost:8080`. It should prov
 
 # Container teardown
 * Remove container: `docker kill {container_id}` where `container_id` can be retrieved by running `docker ps` and found under the column `CONTAINER ID`
+
+# Upload on docker hub
+docker build -t jcpince/simple-express:latest .
+docker push jcpince/simple-express:latest
+
+# Test
+kubectl apply -f deploy/deployment.yaml
+kubectl apply -f deploy/service.yaml
+
+kubectl get pods
+kubectl exec -it <my-app-2-xxx> bash
+curl http://my-app-2-svc:8080/health
+> Returns hello
